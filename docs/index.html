@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerenciador de Obra - Controle seus gastos, materiais e progresso de obra">
+    <meta name="theme-color" content="#ff8c00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Obra">
+    <meta name="apple-mobile-web-app-icon" href="/Bruno-aguiar/icons/icon-192x192.png">
+    
+    <link rel="manifest" href="/Bruno-aguiar/manifest.json">
+    <link rel="icon" type="image/png" href="/Bruno-aguiar/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/Bruno-aguiar/icons/icon-192x192.png">
+    
+    <title>Gerenciador de Obra</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .icon-container {
+            margin-bottom: 30px;
+        }
+        
+        .icon-container svg {
+            width: 100px;
+            height: 100px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .features {
+            text-align: left;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 12px;
+        }
+        
+        .features h3 {
+            color: #ff8c00;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .features ul {
+            list-style: none;
+        }
+        
+        .features li {
+            color: #555;
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ff8c00;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(255, 140, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .info-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 20px;
+        }
+        
+        .install-prompt {
+            display: none;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            color: #856404;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon-container">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Fundo circular -->
+                <circle cx="100" cy="100" r="95" fill="#ff8c00" opacity="0.1"/>
+                
+                <!-- Ferramenta 1 - Martelo -->
+                <g transform="translate(60, 70)">
+                    <rect x="8" y="0" width="4" height="25" fill="#ff8c00" rx="2"/>
+                    <circle cx="10" cy="28" r="8" fill="#ff8c00"/>
+                </g>
+                
+                <!-- Ferramenta 2 - Chave inglesa -->
+                <g transform="translate(110, 70)">
+                    <rect x="0" y="8" width="20" height="4" fill="#ff6b35" rx="2"/>
+                    <circle cx="2" cy="10" r="5" fill="#ff6b35"/>
+                    <circle cx="18" cy="10" r="6" fill="#ff6b35"/>
+                </g>
+                
+                <!-- Gráfico de gastos -->
+                <g transform="translate(50, 110)">
+                    <!-- Barra 1 -->
+                    <rect x="5" y="15" width="8" height="20" fill="#ff8c00" rx="2"/>
+                    <!-- Barra 2 -->
+                    <rect x="18" y="10" width="8" height="25" fill="#ff8c00" rx="2"/>
+                    <!-- Barra 3 -->
+                    <rect x="31" y="5" width="8" height="30" fill="#ff6b35" rx="2"/>
+                    <!-- Linha base -->
+                    <line x1="3" y1="36" x2="42" y2="36" stroke="#ccc" stroke-width="1"/>
+                </g>
+                
+                <!-- Moeda/Dinheiro -->
+                <g transform="translate(110, 115)">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="#ff8c00" stroke-width="2"/>
+                    <text x="12" y="16" font-size="12" font-weight="bold" fill="#ff8c00" text-anchor="middle">$</text>
+                </g>
+            </svg>
+        </div>
+        
+        <h1>🏗️ Gerenciador de Obra</h1>
+        <p class="subtitle">Controle seus gastos, materiais e progresso de forma simples e eficiente</p>
+        
+        <div class="features">
+            <h3>Recursos</h3>
+            <ul>
+                <li>📊 Acompanhamento de gastos</li>
+                <li>📦 Controle de materiais</li>
+                <li>📈 Relatórios e análises</li>
+                <li>💰 Orçamentos personalizados</li>
+                <li>📱 Funciona offline</li>
+                <li>⚡ Acesso rápido e fácil</li>
+            </ul>
+        </div>
+        
+        <div id="installPrompt" class="install-prompt">
+            Clique abaixo para instalar o app na sua tela inicial!
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn btn-primary" id="installBtn" onclick="installApp()">Instalar App</button>
+            <button class="btn btn-secondary" onclick="goToApp()">Abrir App</button>
+        </div>
+        
+        <p class="info-text">
+            💡 Após instalar, o app aparecerá na sua tela inicial como um ícone
+        </p>
+    </div>
+    
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/Bruno-aguiar/sw.js').catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        }
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'block';
+            document.getElementById('installBtn').style.display = 'block';
+        });
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+        
+        function goToApp() {
+            // Redireciona para o app do AI Studio
+            window.location.href = 'https://ai.studio/apps/5823d939-8b21-4633-962c-2532928aa573';
+        }
+        
+        // Detectar se já está instalado
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            document.getElementById('installPrompt').innerHTML = '✅ App instalado com sucesso!';
+            document.getElementById('installBtn').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "Gerenciador de Obra",
+  "short_name": "Obra",
+  "description": "App para gerenciar gastos, materiais e progresso de sua obra",
+  "start_url": "/Bruno-aguiar/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff8c00",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Bruno-aguiar/icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/Bruno-aguiar/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "screenshots": []
+}
